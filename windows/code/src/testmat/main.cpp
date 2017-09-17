@@ -1,7 +1,9 @@
 #include <opencv2/core.hpp>
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/highgui.hpp>
+#include <iostream>
 
+using namespace std;
 using namespace cv;
 
 void  PrintMs(const char *text = "")
@@ -21,7 +23,7 @@ void  PrintMs(const char *text = "")
 
 	if (*text != 0)
 	{
-		printf("%s = %d ms", text, ms);
+		printf("%s = %d ms\n", text, ms);
 	}
 
 	last = getTickCount();
@@ -42,7 +44,7 @@ int main(int argc, char *argv[])
 	}
 	PrintMs("mat.data ms");
 
-
+	/* 不连续空间访问*/
 	for (int row = 0; row < mat.rows; row++)
 	{
 		for (int col = 0; col < mat.cols; col++)
@@ -53,6 +55,41 @@ int main(int argc, char *argv[])
 		}
 	}
 	PrintMs("mat.step ms");
+
+	/* 使用ptr遍历 */
+	for (int row = 0; row < mat.rows; row++)
+	{
+		for (int col = 0; col < mat.cols; col++)
+		{
+			Vec3b *c = mat.ptr<Vec3b>(row, col);
+			c->val[0] = 0;   //B
+			c->val[1] = 255; //G
+			c->val[2] = 0; //R
+		}
+	}
+	PrintMs("mat.ptr ms");
+
+	/*使用at函数遍历*/
+	try {
+		for (int row = 0; row < mat.rows  * 2; row++)
+		{
+			for (int col = 0; col < mat.cols; col++)
+			{
+				Vec3b &m = mat.at<Vec3b>(row, col);
+				m[0] = 100;
+				m[1] = 100;
+				m[2] = 100;
+				/*mat.at<Vec3b>(row, col)[0] = 255;
+				mat.at<Vec3b>(row, col)[1] = 0;
+				mat.at<Vec3b>(row, col)[2] = 255;*/
+			}
+		}
+	}
+	catch (Exception &ex) /*...*/
+	{
+		cout << ex.what() << endl;
+	}
+	PrintMs("mat.at ms");
 
 	namedWindow("mat");
 	imshow("mat", mat);
