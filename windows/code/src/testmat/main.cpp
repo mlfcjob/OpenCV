@@ -71,7 +71,7 @@ int main(int argc, char *argv[])
 
 	/*使用at函数遍历*/
 	try {
-		for (int row = 0; row < mat.rows  * 2; row++)
+		for (int row = 0; row < mat.rows; row++)
 		{
 			for (int col = 0; col < mat.cols; col++)
 			{
@@ -90,6 +90,16 @@ int main(int argc, char *argv[])
 		cout << ex.what() << endl;
 	}
 	PrintMs("mat.at ms");
+
+	PrintMs();
+	auto it = mat.begin<Vec3b>();
+	auto it_end = mat.end<Vec3b>(); //C++ 11特性
+	for (; it != it_end; it++) {
+		(*it).val[0] =  0;    //B
+		(*it).val[1] =  0;    //G
+		(*it).val[2] = 255;   //R
+	}
+	PrintMs("mat.iterator ms");
 
 	namedWindow("mat");
 	imshow("mat", mat);
