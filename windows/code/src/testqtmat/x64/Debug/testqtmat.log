@@ -1,1 +1,4 @@
-﻿
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(368,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  MatView.cpp
+  testqtmat.vcxproj -> D:\msys64\home\malongfei\OpenCV\windows\code\src\testqtmat\..\..\bin\testqtmat.exe
+  testqtmat.vcxproj -> ..\..\bin\testqtmat.pdb (Full PDB)

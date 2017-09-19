@@ -11,7 +11,7 @@ using namespace std;
 
 void MatView::paintEvent(QPaintEvent *e)
 {
-	Mat src = imread("3.jpg");
+	Mat src = imread("2.jpg");
 	cvtColor(src, src, COLOR_BGR2RGB);
 
 	QImage img(src.data, src.cols, src.rows, QImage::Format_RGB888);
