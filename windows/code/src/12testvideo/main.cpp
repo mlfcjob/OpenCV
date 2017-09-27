@@ -32,7 +32,7 @@ void  PrintMs(const char *text = "")
 int main(int argc, char *argv[])
 {
 	VideoCapture video;
-	video.open("2504.mkv");
+	video.open("test.mp4");
 
 	if (!video.isOpened()) {
 		cout << "open video failed!" << endl;
@@ -46,19 +46,19 @@ int main(int argc, char *argv[])
 	namedWindow("video");
 	Mat frame;
 	for (;;) {
-		/*if (!video.read(frame)){
+		if (!video.read(frame)){
 			break;
-		}*/
+		}
 
 		//读帧解码
-		if (!video.grab()) {
-			break;
-		}
+		//if (!video.grab()) {
+		//	break;
+		//}
 
-		//颜色空间转换
-		if (!video.retrieve(frame)) {
-			break;
-		}
+		////颜色空间转换
+		//if (!video.retrieve(frame)) {
+		//	break;
+		//}
 
 		if (frame.empty()) break;
 		imshow("video", frame);
