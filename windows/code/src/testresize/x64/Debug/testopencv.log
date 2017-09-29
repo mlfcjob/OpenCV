@@ -1,1 +1,11 @@
-﻿
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(368,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  main.cpp
+d:\msys\home\malongfei\opencv\windows\code\src\testresize\main.cpp(22): warning C4244: “=”: 从“double”转换到“__int64”，可能丢失数据
+d:\msys\home\malongfei\opencv\windows\code\src\testresize\main.cpp(26): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 2 拥有了类型“__int64”
+  d:\msys\home\malongfei\opencv\windows\code\src\testresize\main.cpp(26): note: 请考虑在格式字符串中使用“%lld”
+  d:\msys\home\malongfei\opencv\windows\code\src\testresize\main.cpp(26): note: 请考虑在格式字符串中使用“%Id”
+  d:\msys\home\malongfei\opencv\windows\code\src\testresize\main.cpp(26): note: 请考虑在格式字符串中使用“%I64d”
+d:\msys\home\malongfei\opencv\windows\code\src\testresize\main.cpp(42): warning C4244: “=”: 从“float”转换到“int”，可能丢失数据
+d:\msys\home\malongfei\opencv\windows\code\src\testresize\main.cpp(44): warning C4244: “=”: 从“float”转换到“int”，可能丢失数据
+  testopencv.vcxproj -> D:\msys\home\malongfei\OpenCV\windows\code\src\testresize\..\..\bin\testresize.exe
+  testopencv.vcxproj -> ..\..\bin\testresize.pdb (Full PDB)
