@@ -1,10 +1,15 @@
 #pragma once
 
 #include <QThread>
+#include <qmutex.h>
+#include <opencv2/core.hpp>
 
 class XVideoThread : public QThread
 {
+	Q_OBJECT
+
 public:
+	int fps = 0;
 	static XVideoThread  *Get() {
 		static XVideoThread vt;
 		return &vt;
@@ -12,11 +17,23 @@ public:
 	//打开一号视频源文件
 	bool Open(const std::string file);
 
+	//返回当前播放的位置
+	double GetPos();
+
+	//实现视频跳转
+	//@ para frame int 帧位置
+	bool Seek(int frame);
+	bool Seek(double pos);
 	~XVideoThread();
 
 	//线程入口函数
 	void run();
+
+signals:
+	void ViewImage1(cv::Mat mat);
+
 protected:
 	XVideoThread();
+	QMutex  mutex;
 };
 

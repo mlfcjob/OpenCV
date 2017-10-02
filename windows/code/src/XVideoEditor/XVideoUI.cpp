@@ -4,14 +4,24 @@
 #include <QMessageBox.h>
 #include <string>
 #include "XVideoThread.h"
-
+#include <iostream>
 using namespace std;
+
+static bool pressSlider = false;
 
 XVideoUI::XVideoUI(QWidget *parent)
 	: QWidget(parent)
 {
 	ui.setupUi(this);
 	setWindowFlags(Qt::FramelessWindowHint);
+
+	qRegisterMetaType<cv::Mat>("cv::Mat");
+	QObject::connect(XVideoThread::Get(),
+		SIGNAL(ViewImage1(cv::Mat)),
+		ui.src1video,
+		SLOT(SetImage(cv::Mat)));
+
+	startTimer(40);
 }
 
 void XVideoUI::open()
@@ -30,4 +40,29 @@ void XVideoUI::open()
 		QMessageBox::information(this, "error", name + "open failed!");
 		return;
 	}
+}
+
+void XVideoUI::timerEvent(QTimerEvent *e)
+{
+	if (pressSlider)
+		return;
+
+	double pos = XVideoThread::Get()->GetPos();
+	ui.playSlider->setValue(pos * 1000);
+}
+
+void XVideoUI::SliderPress()
+{
+	pressSlider = true;
+}
+
+void XVideoUI::SliderRelease()
+{
+	pressSlider = false;
+}
+
+// »¬¶¯ÌõÍÏ¶¯
+void XVideoUI::SetPos(int pos) 
+{
+	XVideoThread::Get()->Seek((double)pos / 1000.0);
 }
