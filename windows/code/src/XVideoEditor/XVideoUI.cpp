@@ -64,5 +64,5 @@ void XVideoUI::SliderRelease()
 // »¬¶¯ÌõÍÏ¶¯
 void XVideoUI::SetPos(int pos) 
 {
-	XVideoThread::Get()->Seek((double)pos / 1000.0);
+	XVideoThread::Get()->Seek((float)pos / 1000.0);
 }
