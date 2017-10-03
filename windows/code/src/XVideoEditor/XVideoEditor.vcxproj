@@ -94,6 +94,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="XFilter.cpp" />
+    <ClCompile Include="XImagePro.cpp" />
     <ClCompile Include="XVideoThread.cpp" />
     <ClCompile Include="XVideoUI.cpp" />
     <ClCompile Include="XVideoWidget.cpp" />
@@ -124,6 +126,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_XVideoUI.h" />
+    <ClInclude Include="XFilter.h" />
+    <ClInclude Include="XImagePro.h" />
     <CustomBuild Include="XVideoThread.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing XVideoThread.h...</Message>

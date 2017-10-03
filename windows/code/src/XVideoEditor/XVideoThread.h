@@ -16,6 +16,8 @@ public:
 	}
 	//打开一号视频源文件
 	bool Open(const std::string file);
+	void Play();
+	void Pause();
 
 	//返回当前播放的位置
 	double GetPos();
@@ -24,16 +26,34 @@ public:
 	//@ para frame int 帧位置
 	bool Seek(int frame);
 	bool Seek(double pos);
+
+	//开始保存视频
+	bool StartSave(const std::string filename ,int width = 0, int height = 0);
+
+	//停止保存视频，写入视频帧的索引
+	void StopSave();
+
 	~XVideoThread();
 
 	//线程入口函数
 	void run();
 
 signals:
+	//显示源视频1图像
 	void ViewImage1(cv::Mat mat);
+	
+	//显示生成目标图像
+	void ViewDes(cv::Mat mat);
+
+	//导出停止
+	void SaveEnd();
 
 protected:
 	XVideoThread();
 	QMutex  mutex;
+
+	//是否开始写视频
+	bool isWrite = false;
+	bool isPlay  = false;
 };
 

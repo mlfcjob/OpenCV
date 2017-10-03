@@ -4,10 +4,12 @@
 #include <QMessageBox.h>
 #include <string>
 #include "XVideoThread.h"
+#include "XFilter.h"
 #include <iostream>
 using namespace std;
 
 static bool pressSlider = false;
+static bool isExport = false;
 
 XVideoUI::XVideoUI(QWidget *parent)
 	: QWidget(parent)
@@ -16,12 +18,48 @@ XVideoUI::XVideoUI(QWidget *parent)
 	setWindowFlags(Qt::FramelessWindowHint);
 
 	qRegisterMetaType<cv::Mat>("cv::Mat");
+
+	//原始视频显示信号
 	QObject::connect(XVideoThread::Get(),
 		SIGNAL(ViewImage1(cv::Mat)),
 		ui.src1video,
 		SLOT(SetImage(cv::Mat)));
 
+	//输出视频显示信号
+	QObject::connect(XVideoThread::Get(),
+		SIGNAL(ViewDes(cv::Mat)),
+		ui.des,
+		SLOT(SetImage(cv::Mat)));
+
+	//导出视频结束
+	QObject::connect(XVideoThread::Get(),
+		SIGNAL(SaveEnd()),
+		this,
+		SLOT(ExportEnd()));
+
+	Pause();
+
 	startTimer(40);
+}
+
+
+//播放
+void XVideoUI::Play()
+{
+	ui.pauseButton->show();
+	XVideoThread::Get()->Play();
+	ui.pauseButton->setGeometry(ui.playButton->geometry());
+	ui.playButton->hide();
+}
+
+//暂停
+void XVideoUI::Pause()
+{
+	ui.playButton->show();
+	XVideoThread::Get()->Pause();
+	//ui.pauseButton->setGeometry(ui.playButton->geometry());
+	ui.pauseButton->hide();
+
 }
 
 void XVideoUI::open()
@@ -66,3 +104,53 @@ void XVideoUI::SetPos(int pos)
 {
 	XVideoThread::Get()->Seek((float)pos / 1000.0);
 }
+
+//停止导出视频
+void  XVideoUI::ExportEnd()
+{
+	isExport = false;
+
+	ui.exportButton->setText("Start Export");
+}
+
+//导出视频
+void XVideoUI::Export()
+{
+
+
+	if (isExport) {
+		//要停止导出
+		XVideoThread::Get()->StopSave();
+		isExport = false;
+		ui.exportButton->setText("Start Export");
+		return;
+	}
+
+	//开始导出
+	QString name = QFileDialog::getSaveFileName(this, "save", "out1.avi");
+	if (name.isEmpty())
+		return;
+
+	std::string filename = name.toLocal8Bit().data();
+
+	if (XVideoThread::Get()->StartSave(filename)) 
+	{
+		isExport = true;
+		ui.exportButton->setText("Stop Export");
+	}
+
+}
+
+//设置过滤器
+void XVideoUI::Set() 
+{
+	XFilter::Get()->Clear();
+
+	//对比度和亮度
+	if (ui.bright->value() > 0 || ui.contrast->value() > 1.0) {
+		XFilter::Get()->Add(XTask{ XTASK_GAIN, 
+		            {(double)ui.bright->value(), ui.contrast->value()}});
+
+	}
+}
+

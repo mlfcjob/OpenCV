@@ -1,4 +1,6 @@
 <RCC>
-    <qresource prefix="XVideoUI">
-    </qresource>
+  <qresource prefix="XVideoUI">
+    <file>play.png</file>
+    <file>puase.png</file>
+  </qresource>
 </RCC>

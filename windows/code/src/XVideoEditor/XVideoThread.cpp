@@ -2,13 +2,18 @@
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgproc.hpp>
+#include <opencv2\videoio.hpp>
 #include <iostream>
+#include "XFilter.h"
 
 using namespace std;
 using namespace cv;
 
 //1 号视频源
 static VideoCapture cap1;
+// 保存视频
+static VideoWriter vw;
+
 static bool isexit = false;
 
 XVideoThread::XVideoThread()
@@ -22,6 +27,7 @@ XVideoThread::~XVideoThread()
 	mutex.lock();
 	isexit = true;
 	mutex.unlock();
+	wait();
 }
 
 void XVideoThread::run()
@@ -41,18 +47,49 @@ void XVideoThread::run()
 			continue;
 		}
        
-		//读取一帧视频，解码并颜色转换
-		if (!cap1.read(mat1) || mat1.empty())
+		if (!isPlay) 
 		{
 			mutex.unlock();
 			msleep(5);
 			continue;
 		}
 
-		//显示图像
-		ViewImage1(mat1);
+		//读取一帧视频，解码并颜色转换
+		if (!cap1.read(mat1) || mat1.empty())
+		{
+			mutex.unlock();
+			//导出到结尾位置，停止导出
+			if (isWrite){
+				StopSave();
+				SaveEnd();
+			}
+			   
+			msleep(5);
+			continue;
+		}
+
+		//显示图像1
+		if (!isWrite) 
+		{
+			ViewImage1(mat1);
+		}
+
+
+		//通过过滤器处理视频
+		Mat des = XFilter::Get()->Filter(mat1, Mat());
+		//显示生成后图像
+		if (!isWrite) {
+			ViewDes(des);
+		}
+	
 		int s = 0;
 		s = 1000 / fps;
+		if (isWrite)
+		{
+			s = 1;
+			vw.write(des);
+		}
+
 		msleep(s);
 		mutex.unlock();
 	
@@ -75,6 +112,20 @@ bool XVideoThread::Open(const std::string file)
 		fps = 25;
 
 	return true;
+}
+
+void XVideoThread::Play()
+{
+	mutex.lock();
+	isPlay = true;
+	mutex.unlock();
+}
+
+void XVideoThread::Pause()
+{
+	mutex.lock();
+	isPlay = false;
+	mutex.unlock();
 }
 
 //返回当前播放位置
@@ -120,5 +171,54 @@ bool XVideoThread::Seek(int frame)
 	mutex.unlock();
 
 	return re;
+}
+
+//开始保存视频
+bool XVideoThread::StartSave(const std::string filename, int width, int height)
+{
+	cout << "开始导出" << endl;
+	
+	Seek(0);
+
+	mutex.lock();
+	if (!cap1.isOpened())
+	{
+		cout << "open video failed " << endl;
+		mutex.unlock();
+		return false;
+	}
+
+	if (width <= 0)
+		width = cap1.get(CAP_PROP_FRAME_WIDTH);
+
+	if (height <= 0)
+		height = cap1.get(CAP_PROP_FRAME_HEIGHT);
+
+	vw.open(filename, 
+		VideoWriter::fourcc('X', '2', '6', '4'),
+		this->fps, 
+		Size(width, height));
+
+	if (!vw.isOpened())
+	{
+		cout << "open writer failed" << endl;
+		mutex.unlock();
+		return false;
+	}
+
+	this->isWrite = true;
+	mutex.unlock();
+	return true;
+}
+
+//停止保存视频，写入视频帧的索引
+void XVideoThread::StopSave()
+{
+	cout << "停止导出" << endl;
+	mutex.lock();
+	vw.release();
+	isWrite = false;
+	mutex.unlock();
+
 }
 
