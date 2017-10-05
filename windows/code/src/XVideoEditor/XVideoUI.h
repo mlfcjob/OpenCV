@@ -27,7 +27,6 @@ public slots:
 
 	//导出视频
 	void Export();
-
 	//停止导出视频
 	void ExportEnd();
 

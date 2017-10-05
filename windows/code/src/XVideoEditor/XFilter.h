@@ -5,7 +5,13 @@
 enum XTaskType
 {
 	XTASK_NONE,
-	XTASK_GAIN,  //亮度对比度调整
+	XTASK_GAIN,     //亮度对比度调整
+	XTASK_ROTATE90, //旋转图像
+	XTASK_ROTATE180,
+	XTASK_ROTATE270,
+	XTASK_FLIPX,    //视频镜像
+	XTASK_FLIPY,
+	XTASK_FLIPXY,
 };
 struct XTask {
 	XTaskType type;

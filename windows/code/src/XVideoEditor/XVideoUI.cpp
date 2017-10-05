@@ -152,5 +152,27 @@ void XVideoUI::Set()
 		            {(double)ui.bright->value(), ui.contrast->value()}});
 
 	}
+
+	//Í¼ÏñÐý×ª 0:NONE, 1:90, 2:180, 3:270
+	if(ui.rotate->currentIndex() == 1) {
+		XFilter::Get()->Add(XTask{ XTASK_ROTATE90 });
+	} 
+	else if (ui.rotate->currentIndex() == 2) {
+		XFilter::Get()->Add(XTask{ XTASK_ROTATE180 });
+	}
+	else if (ui.rotate->currentIndex() == 3) {
+		XFilter::Get()->Add(XTask{ XTASK_ROTATE270 });
+    }
+
+	//Í¼Ïñ¾µÏñ, 0: NONE 1: x, 2: y, 3:xy
+	if(ui.flip->currentIndex() == 1) {
+		XFilter::Get()->Add(XTask{ XTASK_FLIPX });
+	}
+	else if (ui.flip->currentIndex() == 2) {
+		XFilter::Get()->Add(XTask{ XTASK_FLIPY });
+	}
+	else if (ui.flip->currentIndex() == 3) {
+		XFilter::Get()->Add(XTask{ XTASK_FLIPXY });
+	}
 }
 

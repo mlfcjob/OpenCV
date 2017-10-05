@@ -34,3 +34,57 @@ void  XImagePro::Gain(double bright, double contrast)
 	des.convertTo(des, -1, contrast, bright);
 
 }
+
+//对视频图像进行旋转
+
+void XImagePro::Rotate90()
+{
+	if (des.empty() || this->src1.empty())
+		return;
+
+	cv::rotate(this->src1, des, cv::ROTATE_90_CLOCKWISE);
+}
+
+void XImagePro::Rotate180()
+{
+	if (des.empty())
+		return;
+
+	cv::rotate(des, des, cv::ROTATE_180);
+}
+
+void XImagePro::Rotate270()
+{
+	if (des.empty())
+		return;
+
+	cv::rotate(des, des, cv::ROTATE_90_COUNTERCLOCKWISE);
+}
+
+
+
+//视频镜像
+
+//左右镜像
+void XImagePro::FlipX()
+{
+	if (des.empty())
+		return;
+	cv::flip(des, des, 0);
+}
+
+//上下镜像
+void XImagePro::FlipY()
+{
+	if (des.empty())
+		return;
+	cv::flip(des, des, 1);
+}
+
+//上下左右镜像
+void XImagePro::FlipXY()
+{
+	if (des.empty())
+		return;
+	cv::flip(des, des, -1);
+}

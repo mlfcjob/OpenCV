@@ -12,6 +12,16 @@ public:
 	// @para  contrast  int   对比度 1.0 ~ 3.0
 	void Gain(double bright, double contrast);
 
+    //图像旋转
+	void Rotate90();
+	void Rotate180();
+	void Rotate270();
+
+	//视频镜像
+	void FlipX();
+	void FlipY();
+	void FlipXY();
+
 	//获取处理后结果
 	cv::Mat Get() { return des; }
 	XImagePro();
