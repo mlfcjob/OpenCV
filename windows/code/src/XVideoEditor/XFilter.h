@@ -12,6 +12,7 @@ enum XTaskType
 	XTASK_FLIPX,    //视频镜像
 	XTASK_FLIPY,
 	XTASK_FLIPXY,
+	XTASK_RESIZE,   //调整视频大小
 };
 struct XTask {
 	XTaskType type;

@@ -132,8 +132,10 @@ void XVideoUI::Export()
 		return;
 
 	std::string filename = name.toLocal8Bit().data();
+	int w = ui.width->value();
+	int h = ui.height->value();
 
-	if (XVideoThread::Get()->StartSave(filename)) 
+	if (XVideoThread::Get()->StartSave(filename, w, h)) 
 	{
 		isExport = true;
 		ui.exportButton->setText("Stop Export");
@@ -145,6 +147,15 @@ void XVideoUI::Export()
 void XVideoUI::Set() 
 {
 	XFilter::Get()->Clear();
+
+	//调整视频尺寸
+	double w = ui.width->value();
+	double h = ui.width->value();
+	if (ui.width->value() >0  && ui.width->value() > 0)
+	{
+		XFilter::Get()->Add(XTask{ XTASK_RESIZE, {w, h}});
+
+	}
 
 	//对比度和亮度
 	if (ui.bright->value() > 0 || ui.contrast->value() > 1.0) {
@@ -174,5 +185,6 @@ void XVideoUI::Set()
 	else if (ui.flip->currentIndex() == 3) {
 		XFilter::Get()->Add(XTask{ XTASK_FLIPXY });
 	}
+
 }
 

@@ -1,5 +1,7 @@
 #pragma once
 #include <opencv2/core.hpp>
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/imgproc.hpp>
 
 class XImagePro
 {
@@ -21,6 +23,11 @@ public:
 	void FlipX();
 	void FlipY();
 	void FlipXY();
+
+	//调整视频大小
+	// para width int  调整后的宽
+	// para height int  调整后的高
+	void Resize(int width, int height);
 
 	//获取处理后结果
 	cv::Mat Get() { return des; }

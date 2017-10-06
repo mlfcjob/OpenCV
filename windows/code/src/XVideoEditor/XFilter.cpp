@@ -39,6 +39,9 @@ public:
 			case XTASK_FLIPXY:
 				p.FlipXY();
 				break;
+			case XTASK_RESIZE:
+				p.Resize(tasks[i].para[0], tasks[i].para[1]);
+				break;
 			default:
 				break;
 			}

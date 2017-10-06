@@ -88,3 +88,14 @@ void XImagePro::FlipXY()
 		return;
 	cv::flip(des, des, -1);
 }
+
+//调整视频大小
+// para width int  调整后的宽
+// para height int  调整后的高
+void XImagePro::Resize(int width, int height)
+{
+	if (des.empty())
+		return;
+
+	cv::resize(des, des, cv::Size(width, height), 0, 0, cv::INTER_NEAREST);
+}
