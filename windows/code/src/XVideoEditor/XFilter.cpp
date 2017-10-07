@@ -42,6 +42,12 @@ public:
 			case XTASK_RESIZE:
 				p.Resize(tasks[i].para[0], tasks[i].para[1]);
 				break;
+			case XTASK_PYDOWN:
+				p.PyDown(tasks[i].para[0]);
+				break;
+			case XTASK_PYUP:
+				p.PyUp(tasks[i].para[0]);
+				break;
 			default:
 				break;
 			}

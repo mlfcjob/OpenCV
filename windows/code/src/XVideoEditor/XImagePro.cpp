@@ -99,3 +99,25 @@ void XImagePro::Resize(int width, int height)
 
 	cv::resize(des, des, cv::Size(width, height), 0, 0, cv::INTER_NEAREST);
 }
+
+
+//图像金字塔
+void XImagePro::PyDown(int count)   //高斯金字塔
+{
+	if (des.empty())
+		return;
+
+	for (int i = 0; i < count; i++) {
+		cv::pyrDown(des, des);
+	}
+}
+
+void XImagePro::PyUp(int count)   //拉普拉斯金字塔
+{
+	if (des.empty())
+		return;
+
+	for (int i = 0; i < count; i++) {
+		cv::pyrUp(des, des);
+	}
+}

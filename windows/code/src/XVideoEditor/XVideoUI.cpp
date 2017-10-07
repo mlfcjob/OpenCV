@@ -148,13 +148,50 @@ void XVideoUI::Set()
 {
 	XFilter::Get()->Clear();
 
+	//图像金字塔
+	bool isPy = false;
+	double downCount = (double)ui.pyDown->value();
+	double upCount = (double)ui.pyUp->value();
+
+	if (ui.pyDown->value() > 0)
+	{
+		isPy = true;
+		XFilter::Get()->Add(XTask{ XTASK_PYDOWN,{ downCount } });
+		
+		int w = XVideoThread::Get()->width;
+		int h = XVideoThread::Get()->height;
+		for (int i = 0; i < downCount; i++) {
+			w /= 2;
+			h /= 2;
+		}
+
+		ui.width->setValue(w);
+		ui.height->setValue(h);
+	}
+
+	if (ui.pyUp->value() > 0)
+	{
+		isPy = true;
+		XFilter::Get()->Add(XTask{ XTASK_PYUP,{ upCount } });
+
+		int w = XVideoThread::Get()->width;
+		int h = XVideoThread::Get()->height;
+		for (int i = 0; i < upCount; i++) {
+			w *= 2;
+			h *= 2;
+		}
+
+		ui.width->setValue(w);
+		ui.height->setValue(h);
+	}
+
+
 	//调整视频尺寸
 	double w = ui.width->value();
 	double h = ui.width->value();
-	if (ui.width->value() >0  && ui.width->value() > 0)
+	if (ui.width->value() >0  && ui.width->value() > 0 && !isPy)
 	{
 		XFilter::Get()->Add(XTask{ XTASK_RESIZE, {w, h}});
-
 	}
 
 	//对比度和亮度
@@ -185,6 +222,8 @@ void XVideoUI::Set()
 	else if (ui.flip->currentIndex() == 3) {
 		XFilter::Get()->Add(XTask{ XTASK_FLIPXY });
 	}
+
+
 
 }
 

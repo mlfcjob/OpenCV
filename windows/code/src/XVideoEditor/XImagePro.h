@@ -29,6 +29,11 @@ public:
 	// para height int  调整后的高
 	void Resize(int width, int height);
 
+
+	//图像金字塔
+	void PyDown(int count);    //高斯金字塔
+	void PyUp(int count);      //拉普拉斯金字塔
+
 	//获取处理后结果
 	cv::Mat Get() { return des; }
 	XImagePro();

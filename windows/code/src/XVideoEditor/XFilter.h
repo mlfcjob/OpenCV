@@ -13,6 +13,8 @@ enum XTaskType
 	XTASK_FLIPY,
 	XTASK_FLIPXY,
 	XTASK_RESIZE,   //调整视频大小
+	XTASK_PYDOWN,   //高斯金字塔
+	XTASK_PYUP,     //拉普拉斯金字塔
 };
 struct XTask {
 	XTaskType type;
