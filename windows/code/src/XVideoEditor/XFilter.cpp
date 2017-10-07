@@ -51,6 +51,12 @@ public:
 			case XTASK_CLIP:
 				p.Clip(tasks[i].para[0], tasks[i].para[1], tasks[i].para[2], tasks[i].para[3]);
 				break;
+			case XTASK_GRAY:
+				p.Gray();
+				break;
+			case XTASK_BINARY:
+				p.Binary();
+				break;
 			default:
 				break;
 			}

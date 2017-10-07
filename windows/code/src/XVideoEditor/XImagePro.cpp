@@ -137,3 +137,22 @@ void XImagePro::Clip(int x, int y, int width, int height)
 
 	des = des(cv::Rect(x, y, width, height));
 }
+
+//转换为灰度图
+void XImagePro::Gray()
+{
+	if (des.empty())
+		return;
+
+	cv::cvtColor(des, des, cv::COLOR_BGR2GRAY);
+}
+
+//转换为二值化图
+void XImagePro::Binary()
+{
+	if (des.empty())
+		return;
+
+	cv::threshold(des, des, 100, 255, cv::THRESH_BINARY);
+
+}

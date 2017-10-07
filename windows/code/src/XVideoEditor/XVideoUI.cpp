@@ -7,6 +7,7 @@
 #include "XFilter.h"
 #include <iostream>
 using namespace std;
+static bool isColor = true;
 
 static bool pressSlider = false;
 static bool isExport = false;
@@ -135,7 +136,7 @@ void XVideoUI::Export()
 	int w = ui.width->value();
 	int h = ui.height->value();
 
-	if (XVideoThread::Get()->StartSave(filename, w, h)) 
+	if (XVideoThread::Get()->StartSave(filename, w, h, isColor)) 
 	{
 		isExport = true;
 		ui.exportButton->setText("Stop Export");
@@ -146,7 +147,10 @@ void XVideoUI::Export()
 //设置过滤器
 void XVideoUI::Set() 
 {
+	//初始化操作
 	XFilter::Get()->Clear();
+	isColor = true;
+
 
 	//视频图像裁剪
 	bool  isClip = false;
@@ -241,6 +245,17 @@ void XVideoUI::Set()
 	}
 
 
+	//将视频转换为灰度图
+	if (ui.color->currentIndex() == 0)
+	{
+		cout << " RGB " << endl;
+	} else if (ui.color->currentIndex() == 1) {
+		XFilter::Get()->Add(XTask{ XTASK_GRAY });
+		isColor = false;
+	} else if(ui.color->currentIndex() == 2){
+		XFilter::Get()->Add(XTask{XTASK_BINARY});
+		//isColor = false;
+	}
 
 }
 

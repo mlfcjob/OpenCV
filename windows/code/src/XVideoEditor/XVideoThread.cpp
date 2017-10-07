@@ -177,7 +177,7 @@ bool XVideoThread::Seek(int frame)
 }
 
 //开始保存视频
-bool XVideoThread::StartSave(const std::string filename, int width, int height)
+bool XVideoThread::StartSave(const std::string filename, int width, int height, bool isColor)
 {
 	cout << "开始导出" << endl;
 	
@@ -200,7 +200,8 @@ bool XVideoThread::StartSave(const std::string filename, int width, int height)
 	vw.open(filename, 
 		VideoWriter::fourcc('X', '2', '6', '4'),
 		this->fps, 
-		Size(width, height));
+		Size(width, height),
+		isColor);
 
 	if (!vw.isOpened())
 	{

@@ -38,6 +38,12 @@ public:
 	//ROI,画面裁剪
 	void Clip(int x, int y, int width, int height);
 
+	//转换为灰度图
+	void Gray();
+
+	//转换为二值化图
+	void Binary();
+
 	//获取处理后结果
 	cv::Mat Get() { return des; }
 	XImagePro();

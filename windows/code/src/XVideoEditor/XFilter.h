@@ -16,6 +16,8 @@ enum XTaskType
 	XTASK_PYDOWN,   //高斯金字塔
 	XTASK_PYUP,     //拉普拉斯金字塔
 	XTASK_CLIP,      //画面裁剪
+	XTASK_GRAY,      //灰度图
+	XTASK_BINARY,    //二值化图
 };
 struct XTask {
 	XTaskType type;
