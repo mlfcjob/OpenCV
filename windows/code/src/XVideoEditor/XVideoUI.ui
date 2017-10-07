@@ -249,7 +249,7 @@ font: 75 12pt &quot;黑体&quot;;
    <property name="geometry">
     <rect>
      <x>450</x>
-     <y>430</y>
+     <y>420</y>
      <width>91</width>
      <height>16</height>
     </rect>
@@ -262,7 +262,7 @@ font: 75 12pt &quot;黑体&quot;;
    <property name="geometry">
     <rect>
      <x>590</x>
-     <y>430</y>
+     <y>420</y>
      <width>121</width>
      <height>22</height>
     </rect>
@@ -292,7 +292,7 @@ font: 75 12pt &quot;黑体&quot;;
    <property name="geometry">
     <rect>
      <x>450</x>
-     <y>470</y>
+     <y>450</y>
      <width>71</width>
      <height>21</height>
     </rect>
@@ -305,7 +305,7 @@ font: 75 12pt &quot;黑体&quot;;
    <property name="geometry">
     <rect>
      <x>590</x>
-     <y>470</y>
+     <y>450</y>
      <width>121</width>
      <height>22</height>
     </rect>
@@ -335,7 +335,7 @@ font: 75 12pt &quot;黑体&quot;;
    <property name="geometry">
     <rect>
      <x>450</x>
-     <y>520</y>
+     <y>480</y>
      <width>101</width>
      <height>16</height>
     </rect>
@@ -348,7 +348,7 @@ font: 75 12pt &quot;黑体&quot;;
    <property name="geometry">
     <rect>
      <x>590</x>
-     <y>520</y>
+     <y>480</y>
      <width>61</width>
      <height>22</height>
     </rect>
@@ -361,7 +361,7 @@ font: 75 12pt &quot;黑体&quot;;
    <property name="geometry">
     <rect>
      <x>650</x>
-     <y>520</y>
+     <y>480</y>
      <width>61</width>
      <height>22</height>
     </rect>
@@ -373,8 +373,8 @@ font: 75 12pt &quot;黑体&quot;;
   <widget class="QLabel" name="label_6">
    <property name="geometry">
     <rect>
-     <x>320</x>
-     <y>560</y>
+     <x>340</x>
+     <y>510</y>
      <width>221</width>
      <height>16</height>
     </rect>
@@ -387,7 +387,7 @@ font: 75 12pt &quot;黑体&quot;;
    <property name="geometry">
     <rect>
      <x>590</x>
-     <y>560</y>
+     <y>510</y>
      <width>61</width>
      <height>22</height>
     </rect>
@@ -400,13 +400,78 @@ font: 75 12pt &quot;黑体&quot;;
    <property name="geometry">
     <rect>
      <x>650</x>
-     <y>560</y>
+     <y>510</y>
      <width>61</width>
      <height>22</height>
     </rect>
    </property>
    <property name="maximum">
     <number>100</number>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>540</y>
+     <width>161</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>图像裁剪（x,y,w,h）</string>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="cy">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>540</y>
+     <width>61</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="maximum">
+    <number>9999</number>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="cx">
+   <property name="geometry">
+    <rect>
+     <x>570</x>
+     <y>540</y>
+     <width>61</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="maximum">
+    <number>9999</number>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="ch">
+   <property name="geometry">
+    <rect>
+     <x>750</x>
+     <y>540</y>
+     <width>61</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="maximum">
+    <number>9999</number>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="cw">
+   <property name="geometry">
+    <rect>
+     <x>690</x>
+     <y>540</y>
+     <width>61</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="maximum">
+    <number>9999</number>
    </property>
   </widget>
  </widget>

@@ -112,7 +112,8 @@ void XImagePro::PyDown(int count)   //高斯金字塔
 	}
 }
 
-void XImagePro::PyUp(int count)   //拉普拉斯金字塔
+//拉普拉斯金字塔
+void XImagePro::PyUp(int count)  
 {
 	if (des.empty())
 		return;
@@ -120,4 +121,19 @@ void XImagePro::PyUp(int count)   //拉普拉斯金字塔
 	for (int i = 0; i < count; i++) {
 		cv::pyrUp(des, des);
 	}
+}
+
+//ROI,画面裁剪
+void XImagePro::Clip(int x, int y, int width, int height)
+{
+	if (des.empty())
+		return;
+
+	if (x < 0 || y < 0 || width <= 0 || height <= 0)
+		return;
+
+	if (x > des.cols || y > des.rows)
+		return;
+
+	des = des(cv::Rect(x, y, width, height));
 }

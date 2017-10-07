@@ -148,6 +148,23 @@ void XVideoUI::Set()
 {
 	XFilter::Get()->Clear();
 
+	//ÊÓÆµÍ¼Ïñ²Ã¼ô
+	bool  isClip = false;
+	double cx = ui.cx->value();
+	double cy = ui.cy->value();
+	double cw = ui.cw->value();
+	double ch = ui.ch->value();
+
+	if (cx + cy + cw + ch > 0.0001)
+	{
+		isClip = true;
+		XFilter::Get()->Add(XTask{ XTASK_CLIP, {cx, cy, cw, ch}});
+
+		double w = XVideoThread::Get()->width;
+		double h = XVideoThread::Get()->height;
+		XFilter::Get()->Add(XTask{ XTASK_RESIZE, {w, h}});
+	}
+
 	//Í¼Ïñ½ð×ÖËþ
 	bool isPy = false;
 	double downCount = (double)ui.pyDown->value();
@@ -189,7 +206,7 @@ void XVideoUI::Set()
 	//µ÷ÕûÊÓÆµ³ß´ç
 	double w = ui.width->value();
 	double h = ui.width->value();
-	if (ui.width->value() >0  && ui.width->value() > 0 && !isPy)
+	if (isClip && !isPy && ui.width->value() >0  && ui.width->value() > 0 )
 	{
 		XFilter::Get()->Add(XTask{ XTASK_RESIZE, {w, h}});
 	}

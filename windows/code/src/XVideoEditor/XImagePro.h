@@ -34,6 +34,10 @@ public:
 	void PyDown(int count);    //高斯金字塔
 	void PyUp(int count);      //拉普拉斯金字塔
 
+
+	//ROI,画面裁剪
+	void Clip(int x, int y, int width, int height);
+
 	//获取处理后结果
 	cv::Mat Get() { return des; }
 	XImagePro();
