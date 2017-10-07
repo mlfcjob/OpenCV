@@ -57,6 +57,9 @@ public:
 			case XTASK_BINARY:
 				p.Binary();
 				break;
+			case XTASK_MARK:
+				p.Mark(tasks[i].para[0], tasks[i].para[1], tasks[i].para[2]);
+				break;
 			default:
 				break;
 			}

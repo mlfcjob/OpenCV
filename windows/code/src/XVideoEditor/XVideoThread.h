@@ -35,6 +35,9 @@ public:
 	//停止保存视频，写入视频帧的索引
 	void StopSave();
 
+	//添加水印
+	void SetMark(cv::Mat mark);
+
 	~XVideoThread();
 
 	//线程入口函数
@@ -53,6 +56,7 @@ signals:
 protected:
 	XVideoThread();
 	QMutex  mutex;
+	cv::Mat  mark;
 
 	//是否开始写视频
 	bool isWrite = false;

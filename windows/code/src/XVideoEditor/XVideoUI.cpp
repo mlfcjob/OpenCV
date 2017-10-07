@@ -6,11 +6,16 @@
 #include "XVideoThread.h"
 #include "XFilter.h"
 #include <iostream>
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/imgproc.hpp>
+#include <opencv2/highgui.hpp>
+
 using namespace std;
 static bool isColor = true;
 
 static bool pressSlider = false;
 static bool isExport = false;
+static bool isMark = false;
 
 XVideoUI::XVideoUI(QWidget *parent)
 	: QWidget(parent)
@@ -112,6 +117,29 @@ void  XVideoUI::ExportEnd()
 	isExport = false;
 
 	ui.exportButton->setText("Start Export");
+}
+
+//水印
+void XVideoUI::Mark()
+{
+	isMark = false;
+	QString name = QFileDialog::getOpenFileName(this, "select image:");
+
+	if (name.isEmpty()) {
+		return;
+	}
+
+	std::string file = name.toLocal8Bit().data();
+	cv::Mat mark = cv::imread(file);
+
+	if (mark.empty()) 
+	{
+		return;
+	}
+
+	XVideoThread::Get()->SetMark(mark);
+	isMark = true;
+
 }
 
 //导出视频
@@ -255,6 +283,15 @@ void XVideoUI::Set()
 	} else if(ui.color->currentIndex() == 2){
 		XFilter::Get()->Add(XTask{XTASK_BINARY});
 		//isColor = false;
+	}
+
+	//水印
+	if (isMark)
+	{
+		double x = ui.mx->value();
+		double y = ui.my->value();
+		double a = ui.ma->value();
+		XFilter::Get()->Add(XTask{ XTASK_MARK, {x, y, a} });
 	}
 
 }

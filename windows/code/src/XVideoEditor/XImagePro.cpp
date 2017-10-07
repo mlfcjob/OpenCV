@@ -153,6 +153,20 @@ void XImagePro::Binary()
 	if (des.empty())
 		return;
 
-	cv::threshold(des, des, 100, 255, cv::THRESH_BINARY);
+	cv::threshold(des, des, 100, 255, cv::THRESH_BINARY_INV/*cv::THRESH_BINARY_INV*/);
 
+}
+
+// ”∆µÃÌº”ÀÆ”°
+void XImagePro::Mark(int x, int y, double alpha)
+{
+	if (des.empty())
+		return;
+	
+	if (src2.empty())
+		return;
+
+	cv::Mat roi = des(cv::Rect(x,y, src2.cols, src2.rows));
+
+	cv::addWeighted(src2, alpha, roi, 1 - alpha, 0, roi);
 }

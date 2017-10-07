@@ -29,8 +29,9 @@ public slots:
 	void Export();
 	//停止导出视频
 	void ExportEnd();
-
 	
+	//水印
+	void Mark();	
 
 private:
 	Ui::XVideoUIClass ui;

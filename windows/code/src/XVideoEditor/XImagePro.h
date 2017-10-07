@@ -44,6 +44,9 @@ public:
 	//转换为二值化图
 	void Binary();
 
+	//视频添加水印
+	void Mark(int x, int y, double alpha);
+
 	//获取处理后结果
 	cv::Mat Get() { return des; }
 	XImagePro();

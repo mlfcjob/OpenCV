@@ -76,7 +76,9 @@ void XVideoThread::run()
 
 
 		//通过过滤器处理视频
-		Mat des = XFilter::Get()->Filter(mat1, Mat());
+		Mat mat2 = mark;
+
+		Mat des = XFilter::Get()->Filter(mat1, mat2);
 		//显示生成后图像
 		if (!isWrite) {
 			ViewDes(des);
@@ -226,3 +228,10 @@ void XVideoThread::StopSave()
 
 }
 
+//添加水印
+void XVideoThread::SetMark(Mat m)
+{
+	mutex.lock();
+	this->mark = m;
+	mutex.unlock();
+}
