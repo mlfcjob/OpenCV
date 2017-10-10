@@ -47,6 +47,9 @@ public:
 	//视频添加水印
 	void Mark(int x, int y, double alpha);
 
+	//视频融合
+	void Blend(double alpha);
+
 	//获取处理后结果
 	cv::Mat Get() { return des; }
 	XImagePro();

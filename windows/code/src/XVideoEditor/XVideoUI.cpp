@@ -16,6 +16,7 @@ static bool isColor = true;
 static bool pressSlider = false;
 static bool isExport = false;
 static bool isMark = false;
+static bool isBlend = false;
 
 XVideoUI::XVideoUI(QWidget *parent)
 	: QWidget(parent)
@@ -29,6 +30,11 @@ XVideoUI::XVideoUI(QWidget *parent)
 	QObject::connect(XVideoThread::Get(),
 		SIGNAL(ViewImage1(cv::Mat)),
 		ui.src1video,
+		SLOT(SetImage(cv::Mat)));
+
+	QObject::connect(XVideoThread::Get(),
+		SIGNAL(ViewImage2(cv::Mat)),
+		ui.src2video,
 		SLOT(SetImage(cv::Mat)));
 
 	//输出视频显示信号
@@ -123,6 +129,8 @@ void  XVideoUI::ExportEnd()
 void XVideoUI::Mark()
 {
 	isMark = false;
+	isBlend = false;
+
 	QString name = QFileDialog::getOpenFileName(this, "select image:");
 
 	if (name.isEmpty()) {
@@ -142,11 +150,27 @@ void XVideoUI::Mark()
 
 }
 
+//融合
+//暂定水印和融合是冲突的
+void XVideoUI::Blend()
+{
+	isMark = false;
+	isBlend = false;
+
+	QString name = QFileDialog::getOpenFileName(this, "select video:");
+
+	if (name.isEmpty()) {
+		return;
+	}
+
+	std::string file = name.toLocal8Bit().data();
+
+	isBlend = XVideoThread::Get()->Open2(file);
+}
+
 //导出视频
 void XVideoUI::Export()
 {
-
-
 	if (isExport) {
 		//要停止导出
 		XVideoThread::Get()->StopSave();
@@ -294,5 +318,9 @@ void XVideoUI::Set()
 		XFilter::Get()->Add(XTask{ XTASK_MARK, {x, y, a} });
 	}
 
+	if (isBlend) {
+		double a = ui.ba->value();
+		XFilter::Get()->Add(XTask{ XTASK_BLEND, {a} });
+	}
 }
 

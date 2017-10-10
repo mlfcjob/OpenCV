@@ -222,8 +222,8 @@ font: 75 12pt &quot;黑体&quot;;
   <widget class="QPushButton" name="playButton">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>360</y>
+     <x>160</x>
+     <y>340</y>
      <width>31</width>
      <height>23</height>
     </rect>
@@ -236,7 +236,7 @@ font: 75 12pt &quot;黑体&quot;;
    <property name="geometry">
     <rect>
      <x>200</x>
-     <y>360</y>
+     <y>340</y>
      <width>31</width>
      <height>23</height>
     </rect>
@@ -516,7 +516,7 @@ font: 75 12pt &quot;黑体&quot;;
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>390</y>
+     <y>370</y>
      <width>151</width>
      <height>23</height>
     </rect>
@@ -555,7 +555,7 @@ font: 75 12pt &quot;黑体&quot;;
    <property name="geometry">
     <rect>
      <x>230</x>
-     <y>390</y>
+     <y>370</y>
      <width>61</width>
      <height>22</height>
     </rect>
@@ -568,7 +568,7 @@ font: 75 12pt &quot;黑体&quot;;
    <property name="geometry">
     <rect>
      <x>160</x>
-     <y>390</y>
+     <y>370</y>
      <width>61</width>
      <height>22</height>
     </rect>
@@ -577,11 +577,11 @@ font: 75 12pt &quot;黑体&quot;;
     <number>9999</number>
    </property>
   </widget>
-  <widget class="QDoubleSpinBox" name="ma">
+  <widget class="QDoubleSpinBox" name="ba">
    <property name="geometry">
     <rect>
-     <x>300</x>
-     <y>390</y>
+     <x>350</x>
+     <y>430</y>
      <width>61</width>
      <height>22</height>
     </rect>
@@ -594,6 +594,54 @@ font: 75 12pt &quot;黑体&quot;;
    </property>
    <property name="singleStep">
     <double>0.000001000000000</double>
+   </property>
+   <property name="value">
+    <double>0.500000000000000</double>
+   </property>
+  </widget>
+  <widget class="XVideoWidget" name="src2video">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>420</y>
+     <width>260</width>
+     <height>160</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="blendButton">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>430</y>
+     <width>51</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>融合</string>
+   </property>
+  </widget>
+  <widget class="QDoubleSpinBox" name="ma">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>370</y>
+     <width>61</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="minimum">
+    <double>0.000000000000000</double>
+   </property>
+   <property name="maximum">
+    <double>1.000000000000000</double>
+   </property>
+   <property name="singleStep">
+    <double>0.000001000000000</double>
+   </property>
+   <property name="value">
+    <double>0.000000000000000</double>
    </property>
   </widget>
  </widget>
@@ -728,8 +776,8 @@ font: 75 12pt &quot;黑体&quot;;
    <slot>Play()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>97</x>
-     <y>365</y>
+     <x>160</x>
+     <y>345</y>
     </hint>
     <hint type="destinationlabel">
      <x>170</x>
@@ -744,8 +792,8 @@ font: 75 12pt &quot;黑体&quot;;
    <slot>Pause()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>148</x>
-     <y>371</y>
+     <x>200</x>
+     <y>351</y>
     </hint>
     <hint type="destinationlabel">
      <x>117</x>
@@ -761,11 +809,27 @@ font: 75 12pt &quot;黑体&quot;;
    <hints>
     <hint type="sourcelabel">
      <x>15</x>
-     <y>394</y>
+     <y>374</y>
     </hint>
     <hint type="destinationlabel">
      <x>87</x>
      <y>-50</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>blendButton</sender>
+   <signal>clicked()</signal>
+   <receiver>XVideoUIClass</receiver>
+   <slot>Blend()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>322</x>
+     <y>432</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>288</x>
+     <y>-74</y>
     </hint>
    </hints>
   </connection>
@@ -782,5 +846,6 @@ font: 75 12pt &quot;黑体&quot;;
   <slot>Rotate()</slot>
   <slot>Flip()</slot>
   <slot>Mark()</slot>
+  <slot>Blend()</slot>
  </slots>
 </ui>

@@ -60,6 +60,9 @@ public:
 			case XTASK_MARK:
 				p.Mark(tasks[i].para[0], tasks[i].para[1], tasks[i].para[2]);
 				break;
+			case XTASK_BLEND:
+				p.Blend(tasks[i].para[0]);
+				break;
 			default:
 				break;
 			}

@@ -170,3 +170,21 @@ void XImagePro::Mark(int x, int y, double alpha)
 
 	cv::addWeighted(src2, alpha, roi, 1 - alpha, 0, roi);
 }
+
+//视频融合: 暂定alpha默认为第一个视频的透明度
+//视频大小不一致时：直接对第二个视频做缩放
+
+void XImagePro::Blend(double alpha)
+{
+	if (des.empty())
+		return;
+
+	if (src2.empty())
+		return;
+
+	if (src2.size() != des.size()) {
+		cv::resize(src2, src2, des.size());
+	}
+
+	cv::addWeighted(src2, alpha, des, 1 - alpha, 0, des);
+}

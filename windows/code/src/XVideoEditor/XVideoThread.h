@@ -18,6 +18,10 @@ public:
 	}
 	//打开一号视频源文件
 	bool Open(const std::string file);
+
+	//打开二号视频源文件
+	bool Open2(const std::string file);
+
 	void Play();
 	void Pause();
 
@@ -47,6 +51,9 @@ signals:
 	//显示源视频1图像
 	void ViewImage1(cv::Mat mat);
 	
+	//显示源视频2图像
+	void ViewImage2(cv::Mat mat);
+
 	//显示生成目标图像
 	void ViewDes(cv::Mat mat);
 

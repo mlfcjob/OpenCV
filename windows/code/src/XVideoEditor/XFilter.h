@@ -19,6 +19,7 @@ enum XTaskType
 	XTASK_GRAY,      //灰度图
 	XTASK_BINARY,    //二值化图
 	XTASK_MARK,      //添加水印
+	XTASK_BLEND,     // 视频融合
 };
 struct XTask {
 	XTaskType type;

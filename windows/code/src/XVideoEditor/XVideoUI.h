@@ -31,7 +31,10 @@ public slots:
 	void ExportEnd();
 	
 	//Ë®Ó¡
-	void Mark();	
+	void Mark();
+
+	//ÈÚºÏ
+	void Blend();
 
 private:
 	Ui::XVideoUIClass ui;

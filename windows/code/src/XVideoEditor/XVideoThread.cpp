@@ -11,6 +11,10 @@ using namespace cv;
 
 //1 号视频源
 static VideoCapture cap1;
+
+//2 号视频源
+static VideoCapture cap2;
+
 // 保存视频
 static VideoWriter vw;
 
@@ -68,15 +72,22 @@ void XVideoThread::run()
 			continue;
 		}
 
+		//通过过滤器处理视频
+		Mat mat2 = mark;
+
+		if (cap2.isOpened()) {
+			cap2.read(mat2);
+		}
+
 		//显示图像1
+		//显示图像2
 		if (!isWrite) 
 		{
 			ViewImage1(mat1);
+			if (!mat2.empty()) {
+				ViewImage2(mat2);
+			}
 		}
-
-
-		//通过过滤器处理视频
-		Mat mat2 = mark;
 
 		Mat des = XFilter::Get()->Filter(mat1, mat2);
 		//显示生成后图像
@@ -101,6 +112,8 @@ void XVideoThread::run()
 bool XVideoThread::Open(const std::string file)
 {
 	cout << "open " << file << endl;
+	Seek(0);
+
 	mutex.lock();
 	bool re = cap1.open(file);
 	mutex.unlock();
@@ -118,6 +131,32 @@ bool XVideoThread::Open(const std::string file)
 
 	return true;
 }
+
+//打开二号视频源文件
+bool XVideoThread::Open2(const std::string file)
+{
+	cout << "open2 " << file << endl;
+	Seek(0);
+
+	mutex.lock();
+	bool re = cap2.open(file);
+	mutex.unlock();
+	cout << re << endl;
+
+	if (!re)
+		return re;
+
+	//fps = cap2.get(CAP_PROP_FPS);
+	//if (fps <= 0)
+	//	fps = 25;
+
+	//width = cap2.get(CAP_PROP_FRAME_WIDTH);
+	//height = cap2.get(CAP_PROP_FRAME_HEIGHT);
+
+	return true;
+}
+
+
 
 void XVideoThread::Play()
 {
@@ -173,6 +212,11 @@ bool XVideoThread::Seek(int frame)
 	}
 
 	int re = cap1.set(CAP_PROP_POS_FRAMES, frame);
+
+	if (cap2.isOpened()) {
+		cap2.set(CAP_PROP_POS_FRAMES, frame);
+	}
+
 	mutex.unlock();
 
 	return re;
