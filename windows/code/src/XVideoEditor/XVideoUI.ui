@@ -477,7 +477,7 @@ font: 75 12pt &quot;黑体&quot;;
   <widget class="QComboBox" name="color">
    <property name="geometry">
     <rect>
-     <x>590</x>
+     <x>570</x>
      <y>570</y>
      <width>121</width>
      <height>22</height>
@@ -642,6 +642,19 @@ font: 75 12pt &quot;黑体&quot;;
    </property>
    <property name="value">
     <double>0.000000000000000</double>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="mergeButton">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>470</y>
+     <width>51</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>合并</string>
    </property>
   </widget>
  </widget>
@@ -833,6 +846,22 @@ font: 75 12pt &quot;黑体&quot;;
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>mergeButton</sender>
+   <signal>clicked()</signal>
+   <receiver>XVideoUIClass</receiver>
+   <slot>Merge()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>306</x>
+     <y>477</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>302</x>
+     <y>-44</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>open()</slot>
@@ -847,5 +876,6 @@ font: 75 12pt &quot;黑体&quot;;
   <slot>Flip()</slot>
   <slot>Mark()</slot>
   <slot>Blend()</slot>
+  <slot>Merge()</slot>
  </slots>
 </ui>

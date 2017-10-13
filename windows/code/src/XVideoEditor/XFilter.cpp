@@ -63,6 +63,9 @@ public:
 			case XTASK_BLEND:
 				p.Blend(tasks[i].para[0]);
 				break;
+			case XTASK_MERGE:
+				p.Merge();
+				break;
 			default:
 				break;
 			}

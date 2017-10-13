@@ -50,6 +50,9 @@ public:
 	//视频融合
 	void Blend(double alpha);
 
+	//视频合并
+	void Merge();
+
 	//获取处理后结果
 	cv::Mat Get() { return des; }
 	XImagePro();

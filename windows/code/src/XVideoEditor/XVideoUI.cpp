@@ -17,6 +17,7 @@ static bool pressSlider = false;
 static bool isExport = false;
 static bool isMark = false;
 static bool isBlend = false;
+static bool isMerge = false;
 
 XVideoUI::XVideoUI(QWidget *parent)
 	: QWidget(parent)
@@ -130,6 +131,7 @@ void XVideoUI::Mark()
 {
 	isMark = false;
 	isBlend = false;
+	isMerge = false;
 
 	QString name = QFileDialog::getOpenFileName(this, "select image:");
 
@@ -156,6 +158,7 @@ void XVideoUI::Blend()
 {
 	isMark = false;
 	isBlend = false;
+	isMerge = false;
 
 	QString name = QFileDialog::getOpenFileName(this, "select video:");
 
@@ -166,6 +169,24 @@ void XVideoUI::Blend()
 	std::string file = name.toLocal8Bit().data();
 
 	isBlend = XVideoThread::Get()->Open2(file);
+}
+
+//合并
+void XVideoUI::Merge()
+{
+	isMark = false;
+	isBlend = false;
+	isMerge = false;
+
+	QString name = QFileDialog::getOpenFileName(this, "select video:");
+
+	if (name.isEmpty()) {
+		return;
+	}
+
+	std::string file = name.toLocal8Bit().data();
+
+	isMerge = XVideoThread::Get()->Open2(file);
 }
 
 //导出视频
@@ -262,7 +283,7 @@ void XVideoUI::Set()
 	//调整视频尺寸
 	double w = ui.width->value();
 	double h = ui.width->value();
-	if (isClip && !isPy && ui.width->value() >0  && ui.width->value() > 0 )
+	if (!isMerge && isClip && !isPy && ui.width->value() >0  && ui.width->value() > 0 )
 	{
 		XFilter::Get()->Add(XTask{ XTASK_RESIZE, {w, h}});
 	}
@@ -318,9 +339,20 @@ void XVideoUI::Set()
 		XFilter::Get()->Add(XTask{ XTASK_MARK, {x, y, a} });
 	}
 
+	//融合
 	if (isBlend) {
 		double a = ui.ba->value();
 		XFilter::Get()->Add(XTask{ XTASK_BLEND, {a} });
+	}
+
+	//合并
+	if (isMerge) {
+		double h1 = XVideoThread::Get()->height;
+		double h2 = XVideoThread::Get()->height2;
+		int w = XVideoThread::Get()->width2 * ( h2 / h1 );
+		ui.width->setValue(XVideoThread::Get()->width + w);
+		ui.height->setValue(h1);
+		XFilter::Get()->Add(XTask{XTASK_MERGE});
 	}
 }
 

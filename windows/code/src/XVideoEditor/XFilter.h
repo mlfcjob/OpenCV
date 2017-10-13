@@ -20,6 +20,7 @@ enum XTaskType
 	XTASK_BINARY,    //二值化图
 	XTASK_MARK,      //添加水印
 	XTASK_BLEND,     // 视频融合
+	XTASK_MERGE,     // 视频合并
 };
 struct XTask {
 	XTaskType type;
