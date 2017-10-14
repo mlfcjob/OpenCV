@@ -354,7 +354,7 @@ font: 75 12pt &quot;黑体&quot;;
     </rect>
    </property>
    <property name="maximum">
-    <number>999</number>
+    <number>9999</number>
    </property>
   </widget>
   <widget class="QSpinBox" name="height">
@@ -367,7 +367,13 @@ font: 75 12pt &quot;黑体&quot;;
     </rect>
    </property>
    <property name="maximum">
-    <number>999</number>
+    <number>9999</number>
+   </property>
+   <property name="singleStep">
+    <number>1</number>
+   </property>
+   <property name="value">
+    <number>0</number>
    </property>
   </widget>
   <widget class="QLabel" name="label_6">
