@@ -94,6 +94,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="XAudio.cpp" />
     <ClCompile Include="XFilter.cpp" />
     <ClCompile Include="XImagePro.cpp" />
     <ClCompile Include="XVideoThread.cpp" />
@@ -126,6 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_XVideoUI.h" />
+    <ClInclude Include="XAudio.h" />
     <ClInclude Include="XFilter.h" />
     <ClInclude Include="XImagePro.h" />
     <CustomBuild Include="XVideoThread.h">

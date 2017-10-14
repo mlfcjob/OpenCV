@@ -129,6 +129,8 @@ bool XVideoThread::Open(const std::string file)
 	width = cap1.get(CAP_PROP_FRAME_WIDTH);
 	height = cap1.get(CAP_PROP_FRAME_HEIGHT);
 
+	src1File = file;
+
 	return true;
 }
 
@@ -257,6 +259,7 @@ bool XVideoThread::StartSave(const std::string filename, int width, int height, 
 	}
 
 	this->isWrite = true;
+	desFile = filename;
 	mutex.unlock();
 	return true;
 }

@@ -5,10 +5,12 @@
 #include <string>
 #include "XVideoThread.h"
 #include "XFilter.h"
+#include "XAudio.h"
 #include <iostream>
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/highgui.hpp>
+
 
 using namespace std;
 static bool isColor = true;
@@ -122,8 +124,17 @@ void XVideoUI::SetPos(int pos)
 void  XVideoUI::ExportEnd()
 {
 	isExport = false;
-
 	ui.exportButton->setText("Start Export");
+
+	//´¦ÀíÒôÆµ
+	string src = XVideoThread::Get()->src1File;
+	string des = XVideoThread::Get()->desFile;
+
+	XAudio::Get()->ExportA(src , src + ".mp3");
+	string temp = des + ".avi";
+	QFile::remove(temp.c_str());
+	QFile::rename(des.c_str(), temp.c_str());
+	XAudio::Get()->Merge(temp, src + ".mp3", des);
 }
 
 //Ë®Ó¡

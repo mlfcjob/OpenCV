@@ -16,6 +16,10 @@ public:
 	int width2 = 0;
 	int height2 = 0;
 
+	std::string src1File;
+	std::string desFile;
+
+
 	static XVideoThread  *Get() {
 		static XVideoThread vt;
 		return &vt;
