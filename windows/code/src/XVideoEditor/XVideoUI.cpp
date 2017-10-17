@@ -120,6 +120,18 @@ void XVideoUI::SetPos(int pos)
 	XVideoThread::Get()->Seek((float)pos / 1000.0);
 }
 
+//设置切割进度条
+void XVideoUI::Left(int pos)
+{
+	XVideoThread::Get()->SetBegin((double)pos / ui.left->maximum());
+	SetPos(pos);
+}
+
+void XVideoUI::Right(int pos)
+{
+	XVideoThread::Get()->SetEnd((double)pos / ui.right->maximum());
+}
+
 //停止导出视频
 void  XVideoUI::ExportEnd()
 {
@@ -130,7 +142,14 @@ void  XVideoUI::ExportEnd()
 	string src = XVideoThread::Get()->src1File;
 	string des = XVideoThread::Get()->desFile;
 
-	XAudio::Get()->ExportA(src , src + ".mp3");
+	int ss = 0;
+	int t = 0;
+
+	ss = XVideoThread::Get()->totalMs * ((double)ui.left->value() / 1000);
+	int end = XVideoThread::Get()->totalMs * ((double)ui.right->value() / 1000);
+	t = end - ss;
+
+	XAudio::Get()->ExportA(src , src + ".mp3", ss, t);
 	string temp = des + ".avi";
 	QFile::remove(temp.c_str());
 	QFile::rename(des.c_str(), temp.c_str());

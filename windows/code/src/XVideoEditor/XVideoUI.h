@@ -22,6 +22,11 @@ public slots:
 	void SliderRelease();
 	// 滑动条拖动
 	void SetPos(int);
+
+	//设置切割进度条
+	void Left(int pos);
+	void Right(int pos);
+
 	//设置过滤器
 	void Set();
 
@@ -38,6 +43,7 @@ public slots:
 
 	//合并
 	void Merge();
+
 
 private:
 	Ui::XVideoUIClass ui;

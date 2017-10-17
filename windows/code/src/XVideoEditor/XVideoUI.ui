@@ -90,7 +90,7 @@ font: 75 12pt &quot;黑体&quot;;
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>30</y>
+     <y>10</y>
      <width>380</width>
      <height>280</height>
     </rect>
@@ -113,7 +113,7 @@ font: 75 12pt &quot;黑体&quot;;
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>320</y>
+     <y>310</y>
      <width>381</width>
      <height>16</height>
     </rect>
@@ -222,8 +222,8 @@ font: 75 12pt &quot;黑体&quot;;
   <widget class="QPushButton" name="playButton">
    <property name="geometry">
     <rect>
-     <x>160</x>
-     <y>340</y>
+     <x>170</x>
+     <y>370</y>
      <width>31</width>
      <height>23</height>
     </rect>
@@ -236,7 +236,7 @@ font: 75 12pt &quot;黑体&quot;;
    <property name="geometry">
     <rect>
      <x>200</x>
-     <y>340</y>
+     <y>370</y>
      <width>31</width>
      <height>23</height>
     </rect>
@@ -522,7 +522,7 @@ font: 75 12pt &quot;黑体&quot;;
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>370</y>
+     <y>400</y>
      <width>151</width>
      <height>23</height>
     </rect>
@@ -561,7 +561,7 @@ font: 75 12pt &quot;黑体&quot;;
    <property name="geometry">
     <rect>
      <x>230</x>
-     <y>370</y>
+     <y>400</y>
      <width>61</width>
      <height>22</height>
     </rect>
@@ -574,7 +574,7 @@ font: 75 12pt &quot;黑体&quot;;
    <property name="geometry">
     <rect>
      <x>160</x>
-     <y>370</y>
+     <y>400</y>
      <width>61</width>
      <height>22</height>
     </rect>
@@ -587,7 +587,7 @@ font: 75 12pt &quot;黑体&quot;;
    <property name="geometry">
     <rect>
      <x>350</x>
-     <y>430</y>
+     <y>470</y>
      <width>61</width>
      <height>22</height>
     </rect>
@@ -609,7 +609,7 @@ font: 75 12pt &quot;黑体&quot;;
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>420</y>
+     <y>430</y>
      <width>260</width>
      <height>160</height>
     </rect>
@@ -619,7 +619,7 @@ font: 75 12pt &quot;黑体&quot;;
    <property name="geometry">
     <rect>
      <x>290</x>
-     <y>430</y>
+     <y>450</y>
      <width>51</width>
      <height>23</height>
     </rect>
@@ -632,7 +632,7 @@ font: 75 12pt &quot;黑体&quot;;
    <property name="geometry">
     <rect>
      <x>300</x>
-     <y>370</y>
+     <y>400</y>
      <width>61</width>
      <height>22</height>
     </rect>
@@ -654,13 +654,65 @@ font: 75 12pt &quot;黑体&quot;;
    <property name="geometry">
     <rect>
      <x>290</x>
-     <y>470</y>
+     <y>480</y>
      <width>51</width>
      <height>23</height>
     </rect>
    </property>
    <property name="text">
     <string>合并</string>
+   </property>
+  </widget>
+  <widget class="QSlider" name="left">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>290</y>
+     <width>381</width>
+     <height>19</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QSlider::handle:horizontal{
+background: rgb(0, 170, 255);
+border-radius: 5px;
+}
+</string>
+   </property>
+   <property name="maximum">
+    <number>999</number>
+   </property>
+   <property name="value">
+    <number>999</number>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QSlider" name="right">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>330</y>
+     <width>381</width>
+     <height>19</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QSlider::handle:horizontal{
+background: rgb(0, 170, 255);
+border-radius: 5px;
+}
+</string>
+   </property>
+   <property name="maximum">
+    <number>999</number>
+   </property>
+   <property name="value">
+    <number>999</number>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
    </property>
   </widget>
  </widget>
@@ -716,7 +768,7 @@ font: 75 12pt &quot;黑体&quot;;
    <hints>
     <hint type="sourcelabel">
      <x>115</x>
-     <y>328</y>
+     <y>318</y>
     </hint>
     <hint type="destinationlabel">
      <x>151</x>
@@ -732,7 +784,7 @@ font: 75 12pt &quot;黑体&quot;;
    <hints>
     <hint type="sourcelabel">
      <x>188</x>
-     <y>334</y>
+     <y>324</y>
     </hint>
     <hint type="destinationlabel">
      <x>191</x>
@@ -748,7 +800,7 @@ font: 75 12pt &quot;黑体&quot;;
    <hints>
     <hint type="sourcelabel">
      <x>212</x>
-     <y>326</y>
+     <y>316</y>
     </hint>
     <hint type="destinationlabel">
      <x>271</x>
@@ -795,8 +847,8 @@ font: 75 12pt &quot;黑体&quot;;
    <slot>Play()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>160</x>
-     <y>345</y>
+     <x>170</x>
+     <y>375</y>
     </hint>
     <hint type="destinationlabel">
      <x>170</x>
@@ -812,7 +864,7 @@ font: 75 12pt &quot;黑体&quot;;
    <hints>
     <hint type="sourcelabel">
      <x>200</x>
-     <y>351</y>
+     <y>381</y>
     </hint>
     <hint type="destinationlabel">
      <x>117</x>
@@ -828,7 +880,7 @@ font: 75 12pt &quot;黑体&quot;;
    <hints>
     <hint type="sourcelabel">
      <x>15</x>
-     <y>374</y>
+     <y>404</y>
     </hint>
     <hint type="destinationlabel">
      <x>87</x>
@@ -844,7 +896,7 @@ font: 75 12pt &quot;黑体&quot;;
    <hints>
     <hint type="sourcelabel">
      <x>322</x>
-     <y>432</y>
+     <y>452</y>
     </hint>
     <hint type="destinationlabel">
      <x>288</x>
@@ -860,11 +912,43 @@ font: 75 12pt &quot;黑体&quot;;
    <hints>
     <hint type="sourcelabel">
      <x>306</x>
-     <y>477</y>
+     <y>487</y>
     </hint>
     <hint type="destinationlabel">
      <x>302</x>
      <y>-44</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>left</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>XVideoUIClass</receiver>
+   <slot>Left(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>349</x>
+     <y>300</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>349</x>
+     <y>-106</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>right</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>XVideoUIClass</receiver>
+   <slot>Right(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>247</x>
+     <y>335</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>411</x>
+     <y>-38</y>
     </hint>
    </hints>
   </connection>
@@ -883,5 +967,7 @@ font: 75 12pt &quot;黑体&quot;;
   <slot>Mark()</slot>
   <slot>Blend()</slot>
   <slot>Merge()</slot>
+  <slot>Left(int)</slot>
+  <slot>Right(int)</slot>
  </slots>
 </ui>

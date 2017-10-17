@@ -58,8 +58,11 @@ void XVideoThread::run()
 			continue;
 		}
 
+
+		int cur = cap1.get(CAP_PROP_POS_FRAMES);
+
 		//读取一帧视频，解码并颜色转换
-		if (!cap1.read(mat1) || mat1.empty())
+		if ((end > 0 && cur >= end) || !cap1.read(mat1) || mat1.empty())
 		{
 			mutex.unlock();
 			//导出到结尾位置，停止导出
@@ -131,6 +134,9 @@ bool XVideoThread::Open(const std::string file)
 
 	src1File = file;
 
+	double count = cap1.get(CAP_PROP_FRAME_COUNT);
+	totalMs = (count / (double)fps) * 1000;
+
 	return true;
 }
 
@@ -194,6 +200,24 @@ double XVideoThread::GetPos()
 	return pos;
 }
 
+void XVideoThread::SetBegin(double p) 
+{ 
+	mutex.lock();
+	double count = cap1.get(CAP_PROP_FRAME_COUNT);
+	int frame = p * count;
+	begin = frame; 
+	mutex.unlock(); 
+}
+
+void XVideoThread::SetEnd(double p) 
+{ 
+	mutex.lock(); 
+	double count = cap1.get(CAP_PROP_FRAME_COUNT);
+	int frame = p * count;
+	end = frame; 
+	mutex.unlock(); 
+}
+
 bool XVideoThread::Seek(double pos) 
 {
 
@@ -229,7 +253,7 @@ bool XVideoThread::StartSave(const std::string filename, int width, int height, 
 {
 	cout << "开始导出" << endl;
 	
-	Seek(0);
+	Seek(begin);
 
 	mutex.lock();
 	if (!cap1.isOpened())

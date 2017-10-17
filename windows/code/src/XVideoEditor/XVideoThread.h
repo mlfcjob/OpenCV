@@ -16,9 +16,15 @@ public:
 	int width2 = 0;
 	int height2 = 0;
 
+	int totalMs = 0;
 	std::string src1File;
 	std::string desFile;
 
+	int begin = 0;
+	int end = 0;
+
+	void SetBegin(double p);  /* % percent */
+	void SetEnd(double p);
 
 	static XVideoThread  *Get() {
 		static XVideoThread vt;
